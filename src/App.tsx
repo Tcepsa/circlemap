@@ -69,7 +69,6 @@ function App() {
       .then(classesDataAsJson => {
         const classesWithoutIds: Array<IActivityWithoutId> = classesDataAsJson.rows as Array<IActivityWithoutId>;
 
-        console.info("Classes Data As Json:", classesDataAsJson);
         const classesDataWithIds: Array<IActivity> = classesWithoutIds.reduce((classesDataWithIds: Array<IActivity>, classData) => ([...classesDataWithIds, { ...classData, id: crypto.randomUUID() }]), []);
 
         setData(classesDataWithIds);
@@ -77,7 +76,6 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    console.info("Attempting to reduce data:", data);
     const newActivitiesById = data.reduce((activitiesById, activity) => {
       return { ...activitiesById, [activity.id]: activity };
     }, {});
@@ -95,9 +93,6 @@ function App() {
   const [filteredData, setFilteredData] = React.useState(data);
 
   const [selectedActivityId, setSelectedActivityId] = React.useState<ActivityId>('');
-
-  console.info("ActivitiesById:", activitiesById);
-  console.info("SelectedActivityId:", selectedActivityId);
 
   const selectedActivity = activitiesById[selectedActivityId];
 

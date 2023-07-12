@@ -1,5 +1,4 @@
 export default function ActivityList({activities, selectedActivityId, setSelectedActivityId}) {
-  console.log("Activities: ", activities);
   return (
     <div className="grow overflow-y-scroll border-solid border-indigo-600 border-2">
       {activities.map(({ id, classTitle }) => (
