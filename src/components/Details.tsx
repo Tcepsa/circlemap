@@ -1,11 +1,10 @@
-import React from 'react';
 import { IActivity } from '../types';
 
 export interface IDetailsProps {
   selectedActivity: IActivity
 }
 
-function convertDateToTimeString(date) {
+function convertDateToTimeString(date: Date) {
   const minutes = date.getMinutes();
   const minutesString = minutes < 10 ? `0${minutes}` : `${minutes}`;
 

@@ -1,22 +1,22 @@
 import React from 'react';
-import { MapContainer, TileLayer, Marker, Tooltip, LayerGroup} from 'react-leaflet';
-import L, { Icon } from 'leaflet';
+import { MapContainer, TileLayer, Marker, LayerGroup} from 'react-leaflet';
+import { Icon } from 'leaflet';
 import {
   IActivity,
-  ActivityId,
+  IActivityListProps,
 } from '../types';
 
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import markerIcon2xPng from "leaflet/dist/images/marker-icon-2x.png";
 import "leaflet/dist/leaflet.css";
 
-export interface IMapProps {
-  activities: Array<IActivity>;
-  selectedActivityId: ActivityId;
-  setSelectedActivityId: Function;
-}
+/* export interface IMapProps {
+ *   activities: Array<IActivity>;
+ *   selectedActivityId: ActivityId;
+ *   setSelectedActivityId: Function;
+ * } */
 
-export default function Map({activities, selectedActivityId, setSelectedActivityId}) {
+export default function Map({activities, selectedActivityId, setSelectedActivityId}: IActivityListProps) {
   //  style={{width: "100vw", height: "100vh", border: "3px solid purple"}}
   // style={{width: "100%", height: "100%", border: "3px solid purple"}}
   // <Marker position={[lat, lng]} icon={new Icon({iconUrl: markerIconPng, iconSize: [25, 41], iconAnchor: [12, 41]})} />

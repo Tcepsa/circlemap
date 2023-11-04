@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css'
 import Details from './components/Details';
-import Filters from './components/Filters';
+/* import Filters from './components/Filters'; */
 import ActivityList from './components/ActivityList';
 import { v4 as uuidv4 } from 'uuid';
 import Map from './components/Map';
@@ -9,7 +9,7 @@ import {
   IActivityWithoutId,
   IActivity,
   ActivityId,
-  IFilters,
+    /* IFilters, */
 } from './types';
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
 
   const [data, setData] = React.useState<Array<IActivity>>([]);
   const [activitiesById, setActivitiesById] = React.useState<Record<ActivityId, IActivity>>({});
-  const [filters, setFilters] = React.useState<IFilters>({});
+    /* const [filters, setFilters] = React.useState<IFilters>({}); */
 
   // "Constructor" to load data when component is first created
   React.useEffect(() => {
@@ -70,13 +70,13 @@ function App() {
   }, [data]);
 
   // Filter the data based on the filters... and the data! XD
-  React.useEffect(() => {
-    setFilteredData(data);
+    /* React.useEffect(() => {
+     *   setFilteredData(data);
 
-    console.log("Data with lat")
-  }, [data]);
+     *   console.log("Data with lat")
+     * }, [data]); */
 
-  const [filteredData, setFilteredData] = React.useState(data);
+    const [filteredData, _setFilteredData] = React.useState(data);
 
   const [selectedActivityId, setSelectedActivityId] = React.useState<ActivityId>('');
 
@@ -85,7 +85,7 @@ function App() {
   return (
     <div style={{display: "flex", flexDirection: "row"}} >
       <div style={{display: "flex", border: "2px solid green", height: "100vh", minWidth: "350px", maxWidth: "350px" }} >
-        <Filters setFilteredData={setFilteredData} />
+          {/* <Filters setFilteredData={setFilteredData} /> */}
         <ActivityList activities={filteredData} selectedActivityId={selectedActivityId} setSelectedActivityId={setSelectedActivityId}/>
       </div>
       <div style={{ display: "flex", flexDirection: "column", border: "2px solid orange", flexGrow: "4" }} >

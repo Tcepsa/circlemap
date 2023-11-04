@@ -1,4 +1,6 @@
-export default function ActivityList({activities, selectedActivityId, setSelectedActivityId}) {
+import { IActivityListProps } from "../types.tsx";
+
+function ActivityList({activities, selectedActivityId, setSelectedActivityId}: IActivityListProps) {
   return (
     <div className="grow overflow-y-scroll border-solid border-indigo-600 border-2">
       {activities.map(({ id, classTitle }) => (
@@ -10,3 +12,5 @@ export default function ActivityList({activities, selectedActivityId, setSelecte
     </div>
   );
 }
+
+export default ActivityList;

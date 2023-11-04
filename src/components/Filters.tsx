@@ -1,10 +1,13 @@
-// Filter on the data to be displayed
-export interface IFiltersProps {
-  setFilters: Function;
-}
+import { IFiltersProps } from "../types.tsx";
 
+// Filter on the data to be displayed
 export default function Filters( { setFilters }: IFiltersProps ) {
+
   return (
-    <div></div>
-  )
+    <div>
+      <button onClick={setFilters}>
+        Apply Filters
+      </button>
+    </div>
+  );
 }

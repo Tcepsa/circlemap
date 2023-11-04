@@ -1,3 +1,5 @@
+import { MouseEventHandler } from "react";
+
 export interface IActivityWithoutId {
   classTitle: string;
   classDescription: string;
@@ -21,4 +23,14 @@ export interface IActivity extends IActivityWithoutId {
 
 export interface IFilters {
   
+}
+
+export interface IFiltersProps {
+    setFilters: MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface IActivityListProps {
+    activities: Array<IActivity>,
+    selectedActivityId: ActivityId,
+    setSelectedActivityId: (arg0: ActivityId) => void,
 }
