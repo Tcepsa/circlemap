@@ -3,7 +3,7 @@ import './App.css'
 import Details from './components/Details';
 import Filters from './components/Filters';
 import ActivityList from './components/ActivityList';
-import readXlsxFile from 'read-excel-file';
+import { v4 as uuidv4 } from 'uuid';
 import Map from './components/Map';
 import {
   IActivityWithoutId,
@@ -43,33 +43,18 @@ function App() {
 
   // "Constructor" to load data when component is first created
   React.useEffect(() => {
-    const spreadsheetToJsonKeyMapping = {
-      "Class Title": "classTitle",
-      "Class Description": "classDescription",
-      "Location - Including Address": "displayLocation",
-      "Latitude": "latitude",
-      "Longitude": "longitude",
-      "Date": "date",
-      "Start Time": "startTime",
-      "End Time": "endTime",
-      "Does your Class Repeat?": "repeats",
-      "Class Minimum": "classMinimum",
-      "Class Maximum": "classMaximum",
-      "Fee": "fee",
-    };
 
-    fetch("/resources/classes.xlsx")
+    fetch("/resources/geocodedClasses.json")
       .then(response => {
         if(!response.ok) {
           console.error("Something went wrong fetching the classes spreadsheet", response.status, response.statusText);
         }
-        return response.blob();
+        return response.json();
       })
-      .then(blob => readXlsxFile(blob, {map: spreadsheetToJsonKeyMapping}))
       .then(classesDataAsJson => {
-        const classesWithoutIds: Array<IActivityWithoutId> = classesDataAsJson.rows as Array<IActivityWithoutId>;
+        const classesWithoutIds: Array<IActivityWithoutId> = classesDataAsJson as Array<IActivityWithoutId>;
 
-        const classesDataWithIds: Array<IActivity> = classesWithoutIds.reduce((classesDataWithIds: Array<IActivity>, classData) => ([...classesDataWithIds, { ...classData, id: crypto.randomUUID() }]), []);
+        const classesDataWithIds: Array<IActivity> = classesWithoutIds.reduce((classesDataWithIds: Array<IActivity>, classData) => ([...classesDataWithIds, { ...classData, id: uuidv4()}]), []);
 
         setData(classesDataWithIds);
       });
@@ -88,6 +73,7 @@ function App() {
   React.useEffect(() => {
     setFilteredData(data);
 
+    console.log("Data with lat")
   }, [data]);
 
   const [filteredData, setFilteredData] = React.useState(data);
